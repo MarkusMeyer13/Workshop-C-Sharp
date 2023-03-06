@@ -1,4 +1,5 @@
-﻿using System.Globalization;
+﻿using System.Collections;
+using System.Globalization;
 using System.Text;
 
 namespace HelloWorld;
@@ -11,6 +12,11 @@ internal class Program
     /// <param name="args">The arguments.</param>
     static void Main(string[] args)
     {
+        for (int i = 0; i < args.Length; i++)
+        {
+            Console.WriteLine(args[i]);
+        }
+
         // Casting();
         //ControlMyFlow(true);
         //CheckInt(1);
@@ -24,12 +30,41 @@ internal class Program
 
         int[] numbers = new int[2] { 4, 3 };
         LoopArrayWithWhile(numbers);
+
+        var findResult = FindElement(numbers, 4);
+        if (findResult.HasValue)
+        {
+            Console.WriteLine("Find result: " + findResult.Value);
+        }
+
+        Console.WriteLine(findResult);
+
+        var elements = new string[3] { "lorem", "ipsum", "hello" };
+        elements[2] = "world";
+        Console.WriteLine(string.Join('_', elements));
+
+        ArrayList arrayList = new ArrayList();
+        arrayList.Add("hallo");
+        arrayList.Add("welt");
+        arrayList.Add(1);
+        Console.WriteLine(string.Join('_', arrayList.ToArray()));
+
+    }
+
+    static int? FindElement(int[] elements, int index)
+    {
+        if (index > elements.Length - 1)
+        {
+            return null;
+        }
+
+        return elements[index];
     }
 
     static void LoopArrayWithWhile(int[] numbers)
     {
         var enumerator = numbers.GetEnumerator();
-        while (enumerator.MoveNext()) 
+        while (enumerator.MoveNext())
         {
             Console.WriteLine("enumerator.Current: " + enumerator.Current);
         }
