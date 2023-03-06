@@ -1,9 +1,17 @@
-﻿namespace HelloWorld
+﻿using System.Globalization;
+using System.Transactions;
+
+namespace HelloWorld
 {
     internal class Program
     {
+        /// <summary>
+        /// Defines the entry point of the application.
+        /// </summary>
+        /// <param name="args">The arguments.</param>
         static void Main(string[] args)
         {
+            #region divide simple 
             int firstNumber;
             firstNumber = 1;
             int secondNumber = 3;
@@ -23,6 +31,31 @@
             double divideThird = integerFirst / 5;
 
             Console.WriteLine("Result divide integer by integer: " + divideThird);
+            #endregion
+
+            // Convert string to double
+            string number = "12.5";
+            
+            
+            double doubleFromString1 = Convert.ToDouble(number, new CultureInfo("en-US"));
+            Console.WriteLine("doubleFromString1: " + doubleFromString1);
+           
+            // Parse
+            double doubleFromString2 = double.Parse(number, new CultureInfo("en-US"));
+            Console.WriteLine("doubleFromString2: " + doubleFromString2);
+
+            // Cast
+            var castResult = (double)integerFirst;
+            Console.WriteLine($"castResult: {castResult + 3}");
+
+            #region char
+
+            char charFirst = 'a';
+            Console.WriteLine(string.Format("charFirst: {0}", charFirst));
+
+            Console.WriteLine($"charFirst: {(int)charFirst + 3}");
+
+            #endregion
         }
     }
 }
