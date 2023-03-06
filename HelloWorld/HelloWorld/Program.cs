@@ -12,11 +12,6 @@ internal class Program
     /// <param name="args">The arguments.</param>
     static void Main(string[] args)
     {
-        for (int i = 0; i < args.Length; i++)
-        {
-            Console.WriteLine(args[i]);
-        }
-
         // Casting();
         //ControlMyFlow(true);
         //CheckInt(1);
@@ -49,6 +44,9 @@ internal class Program
         arrayList.Add(1);
         Console.WriteLine(string.Join('_', arrayList.ToArray()));
 
+        Console.WriteLine("Please enter something to end:  ");
+        var input = Console.ReadLine();
+        Console.WriteLine(input);
     }
 
     static int? FindElement(int[] elements, int index)
