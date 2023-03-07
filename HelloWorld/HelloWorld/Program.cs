@@ -45,8 +45,22 @@ internal class Program
         Console.WriteLine(string.Join('_', arrayList.ToArray()));
 
         Console.WriteLine("Please enter something to end:  ");
-        var input = Console.ReadLine();
-        Console.WriteLine(input);
+        //var input = Console.ReadLine();
+        //Console.WriteLine(input);
+
+        Console.WriteLine(ReverseString("Hello, World!"));
+        Console.WriteLine(string.Concat("Hallo".Reverse()));
+    }
+
+    static string ReverseString(string txt)
+    {
+        var result = string.Empty;
+        for (int i = txt.Length - 1; i >= 0; i--)
+        {
+            result += txt[i];
+        }
+
+        return result;
     }
 
     static int? FindElement(int[] elements, int index)
