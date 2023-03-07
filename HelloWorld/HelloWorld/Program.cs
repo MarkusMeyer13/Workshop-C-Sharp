@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Globalization;
 using System.Text;
+using VehicleFactory;
 
 namespace HelloWorld;
 
@@ -55,12 +56,6 @@ internal class Program
 
     static void PlayTicTacToe()
     {
-        int[] oneDimension = new int[7];
-        int[,] twoDimension = new int[7,5];
-        int[,,] threeDimension = new int[9,4,4];
-        Console.WriteLine(threeDimension.Rank);
-
-
         string[,] ticTacToe = new string[3, 3];
         ticTacToe[2, 2] = "x";
 
@@ -273,6 +268,9 @@ internal class Program
         Console.WriteLine($"stringBuilder: {stringBuilder.ToString()}");
 
         #endregion
+
+        Car car = new Car();
+        //car.m
     }
 
 }

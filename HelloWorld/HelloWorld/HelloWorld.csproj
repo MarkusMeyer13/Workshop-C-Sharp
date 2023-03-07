@@ -8,4 +8,10 @@
     <GenerateDocumentationFile>True</GenerateDocumentationFile>
   </PropertyGroup>
 
+  <ItemGroup>
+    <Reference Include="VehicleFactory">
+      <HintPath>..\..\VehicleFactory\VehicleFactory\bin\Debug\net7.0\VehicleFactory.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+
 </Project>

@@ -14,7 +14,20 @@ namespace VehicleFactoryCmd
 
             foreach (var driveable in driveables)
             {
-                driveable.Drive();
+
+                try
+                {
+                    driveable.Drive();
+                }
+                catch (Exception e)
+                {
+                    Console.WriteLine(e.Message);
+                }
+                finally
+                {
+
+                }
+
             }
         }
 
@@ -42,6 +55,10 @@ namespace VehicleFactoryCmd
             return;
 
             CreateEngine();
+        }
+
+        private static void DriveVehicles()
+        {
             Car gti = new Car(new Manufacturer() { Name = "VW" })
             {
                 Model = "test"
@@ -103,6 +120,7 @@ namespace VehicleFactoryCmd
             listDriveable.Add(vehicle2);
             listDriveable.Add(new Truck(manufacturerVM));
             //driveableTruck.
+
         }
     }
 }
