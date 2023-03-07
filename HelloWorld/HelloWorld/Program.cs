@@ -50,6 +50,28 @@ internal class Program
 
         Console.WriteLine(ReverseString("Hello, World!"));
         Console.WriteLine(string.Concat("Hallo".Reverse()));
+        PlayTicTacToe();
+    }
+
+    static void PlayTicTacToe()
+    {
+        int[] oneDimension = new int[7];
+        int[,] twoDimension = new int[7,5];
+        int[,,] threeDimension = new int[9,4,4];
+        Console.WriteLine(threeDimension.Rank);
+
+
+        string[,] ticTacToe = new string[3, 3];
+        ticTacToe[2, 2] = "x";
+
+        for(int i = ticTacToe.GetLowerBound(0); i <= ticTacToe.GetUpperBound(0); i++)
+        {
+            for (int j = ticTacToe.GetLowerBound(1); j <= ticTacToe.GetUpperBound(1); j++)
+            {
+                var item = ticTacToe[i, j];
+                Console.WriteLine ($"i: {i}; j: {j}; " + item);
+            }
+        }
     }
 
     static string ReverseString(string txt)
