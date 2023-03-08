@@ -51,11 +51,26 @@ namespace VehicleFactoryCmd
 
         static void Main(string[] args)
         {
+            var newCar = Factory.BuildWithType<Car>(new Manufacturer());
+
+            var car = Factory.Build<Car>(new Manufacturer() { Name = "VM" });
+            car?.Drive();
+
+            var truck = Factory.Build<Truck>(new Manufacturer() { Name = "Daimler" });
+            if (truck != null)
+            {
+                truck.Drive();
+            }
+
+
+
             Vehicles();
             return;
 
             CreateEngine();
         }
+
+
 
         private static void DriveVehicles()
         {
