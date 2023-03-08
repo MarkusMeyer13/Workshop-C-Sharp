@@ -1,4 +1,6 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using System;
+using System.Linq;
+using System.ComponentModel.DataAnnotations;
 using VehicleFactory;
 
 namespace VehicleFactoryCmd
@@ -49,7 +51,7 @@ namespace VehicleFactoryCmd
             }
         }
 
-        static void Main(string[] args)
+        private static void Build()
         {
             var newCar = Factory.BuildWithType<Car>(new Manufacturer());
 
@@ -66,22 +68,66 @@ namespace VehicleFactoryCmd
             vehicles.Add("gti", newCar);
             vehicles.Add("gti1", newCar);
 
-            if(vehicles.ContainsKey("gti"))
+            if (vehicles.ContainsKey("gti"))
             {
                 var result = vehicles["gti"];
             }
 
-            if(vehicles.TryGetValue("gti", out Car? foundCar))
+            if (vehicles.TryGetValue("gti", out Car? foundCar))
             {
                 Console.WriteLine(foundCar);
             }
 
-            foreach(var item in vehicles)
+            foreach (var item in vehicles)
             {
                 //item.Value.Drive();
-                Console.WriteLine( item.Value.GetType().FullName);
-                Console.WriteLine( item.Key);
+                Console.WriteLine(item.Value.GetType().FullName);
+                Console.WriteLine(item.Key);
             }
+
+        }
+
+        static void Main(string[] args)
+        {
+            var manufacturers = new List<Manufacturer>();
+
+            var manufacturerVW = new Manufacturer() { Name = "VW" };
+            manufacturers.Add(manufacturerVW);
+
+            var manufacturerBmw = new Manufacturer() { Name = "BMW" };
+            manufacturers.Add(manufacturerBmw);
+            manufacturers.Add(manufacturerBmw);
+
+            var manufacturerMercedes = new Manufacturer() { Name = "Mercedes" };
+            manufacturers.Add(manufacturerMercedes);
+
+            var manufacturerFound = from manufacturer in manufacturers
+                                        //where manufacturer.Name.Contains("M")
+                                    select manufacturer;
+            Console.WriteLine(manufacturers.Distinct().Count());
+
+            var distinctManufacturers = manufacturers
+                .GroupBy(_ => _.Name)
+                .Select(_ => _.First())
+                .OrderBy(_ => _.Name)
+                .FirstOrDefault();
+            //.ToList();
+
+            var gti = new Car(manufacturerVW) { Engine = new Engine() { HorsePower = 10 } };
+            var cClass = new Car(manufacturerMercedes) { Engine = new Engine() { HorsePower = 25 } };
+            var cars = new List<Car>();
+            cars.Add(gti);
+            cars.Add(gti);
+            cars.Add(cClass);
+
+            var totalHorsePower = cars
+                 .Where(_ => _.Manufacturer != null &&
+            _.Manufacturer.Name == "VW")
+                 .Select(_ => _.Engine?.HorsePower)
+                 .Sum();
+
+            Console.WriteLine(totalHorsePower);
+
 
             //Vehicles();
             return;
