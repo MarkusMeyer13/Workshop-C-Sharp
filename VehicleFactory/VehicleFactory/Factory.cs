@@ -23,5 +23,22 @@ namespace VehicleFactory
             Console.WriteLine($"Type:  {result?.GetType().FullName}");
             return result;
         }
+
+        public static T? BuildWithType<T>(Manufacturer manufacturer) where T : IDriveable
+        {
+            T? result  = default;
+
+            if (typeof(T) == typeof(Car))
+            {
+                var car = new Car(manufacturer);
+                result = (T)Convert.ChangeType(car, typeof(T));
+            }
+            else if (typeof(T) == typeof(Truck))
+            {
+                var truck = new Truck(manufacturer);
+                result = (T)Convert.ChangeType(truck, typeof(T));
+            }
+            return result;
+        }
     }
 }

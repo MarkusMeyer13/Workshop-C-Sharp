@@ -54,17 +54,36 @@ namespace VehicleFactoryCmd
             var newCar = Factory.BuildWithType<Car>(new Manufacturer());
 
             var car = Factory.Build<Car>(new Manufacturer() { Name = "VM" });
-            car?.Drive();
+            //car?.Drive();
 
             var truck = Factory.Build<Truck>(new Manufacturer() { Name = "Daimler" });
-            if (truck != null)
+            //if (truck != null)
+            //{
+            //    truck.Drive();
+            //}
+
+            var vehicles = new Dictionary<string, Car>();
+            vehicles.Add("gti", newCar);
+            vehicles.Add("gti1", newCar);
+
+            if(vehicles.ContainsKey("gti"))
             {
-                truck.Drive();
+                var result = vehicles["gti"];
             }
 
+            if(vehicles.TryGetValue("gti", out Car? foundCar))
+            {
+                Console.WriteLine(foundCar);
+            }
 
+            foreach(var item in vehicles)
+            {
+                Console.WriteLine( item.Value.GetType().FullName);
+                Console.WriteLine( item.Key);
 
-            Vehicles();
+            }
+
+            //Vehicles();
             return;
 
             CreateEngine();
