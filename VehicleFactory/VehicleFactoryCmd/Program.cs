@@ -2,6 +2,9 @@
 using System.Linq;
 using System.ComponentModel.DataAnnotations;
 using VehicleFactory;
+using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
+using System.Collections;
 
 namespace VehicleFactoryCmd
 {
@@ -87,7 +90,7 @@ namespace VehicleFactoryCmd
 
         }
 
-        static void Main(string[] args)
+        private static void LinqQueries()
         {
             var manufacturers = new List<Manufacturer>();
 
@@ -127,15 +130,55 @@ namespace VehicleFactoryCmd
                  .Sum();
 
             Console.WriteLine(totalHorsePower);
+        }
 
+        static void Main(string[] args)
+        {
+            WorkingWithJson();
 
-            //Vehicles();
+            ////Vehicles();
             return;
 
             CreateEngine();
         }
 
+        private static void WorkingWithJson()
+        {
+            string fileName = "VehicleFactory.data.Engine.json";
+            var resourceStream = typeof(Engine).Assembly.GetManifestResourceStream(fileName);
 
+            if (resourceStream != null)
+            {
+                using StreamReader reader = new StreamReader(resourceStream);
+                string text = reader.ReadToEnd();
+                Console.WriteLine(text);
+            }
+
+            var path = ".\\Cars.json";
+            var json = File.ReadAllText(path);
+
+
+            //var json = "[ { \"Model\": \"test\", \"Manufacturer\": { \"Name\": \"VW\" }, \"Engine\": { \"Type\": null, \"HorsePower\": 10 } }, { \"Model\": null, \"Manufacturer\": { \"Name\": \"BMW\" }, \"Engine\": { \"Type\": null, \"HorsePower\": 10 } } ] ";
+
+            var data = JArray.Parse(json);
+            for (int i = 0; i < data.Count; i++)
+            {
+                JObject obj = (JObject)data[i];
+
+
+                Console.WriteLine(obj["Model"]);
+            }
+
+            Engine engine = new Engine() { HorsePower = 10, EngineType = EngineType.Electric };
+            var jsonDocument = JsonConvert.SerializeObject(engine);
+
+            //var manufacturerVW = new Manufacturer() { Name = "VW" };
+            //var gti = new Car(manufacturerVW) { Engine = new Engine() { HorsePower = 10 } };
+
+
+
+            ////var engine2 = JsonConvert.DeserializeObject<Engine>(jsonDocument);  
+        }
 
         private static void DriveVehicles()
         {

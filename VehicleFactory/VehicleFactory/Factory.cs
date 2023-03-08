@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -24,6 +25,7 @@ namespace VehicleFactory
             return result;
         }
 
+        [Obsolete("Please use 'Build'", false)]
         public static T? BuildWithType<T>(Manufacturer manufacturer) where T : IDriveable
         {
             T? result  = default;
