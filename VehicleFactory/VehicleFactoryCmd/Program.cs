@@ -78,9 +78,9 @@ namespace VehicleFactoryCmd
 
             foreach(var item in vehicles)
             {
+                //item.Value.Drive();
                 Console.WriteLine( item.Value.GetType().FullName);
                 Console.WriteLine( item.Key);
-
             }
 
             //Vehicles();
