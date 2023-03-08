@@ -1,0 +1,18 @@
+[
+  {
+    "Model": null,
+    "Manufacturer": { "Name": "VW" },
+    "Engine": {
+      "Type": null,
+      "HorsePower": 10
+    }
+  },
+  {
+    "Model": null,
+    "Manufacturer": { "Name": "BMW" },
+    "Engine": {
+      "Type": null,
+      "HorsePower": 10
+    }
+  }
+]
