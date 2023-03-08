@@ -165,7 +165,6 @@ namespace VehicleFactoryCmd
             {
                 JObject obj = (JObject)data[i];
 
-
                 Console.WriteLine(obj["Model"]);
             }
 
