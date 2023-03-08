@@ -27,6 +27,7 @@ LINQ
 Asynchronous programming  
 Reflection and attributes  
 Collections and iterators  
+Git  
 
 ## Day 4: Database Connectivity
 
@@ -42,7 +43,6 @@ LINQ to SQL
 
 Additional topics  
 Unit Tests  
-Git  
 Question & answers  
 ASP.Net Core
 JSON
