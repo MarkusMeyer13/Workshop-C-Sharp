@@ -15,5 +15,7 @@ namespace VehicleFactory
         /// The name.
         /// </value>
         public string? Name { get; set; }
+
+        public int Id { get; set; }
     }
 }

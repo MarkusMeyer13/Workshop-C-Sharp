@@ -5,6 +5,8 @@ using VehicleFactory;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using System.Collections;
+using System.Data.SqlClient;
+using System.Data;
 
 namespace VehicleFactoryCmd
 {
@@ -132,9 +134,118 @@ namespace VehicleFactoryCmd
             Console.WriteLine(totalHorsePower);
         }
 
+
+        private static void SelectSqlDataSet()
+        {
+            var connectionString = "Server=tcp:workshop-csharp.database.windows.net,1433;Initial Catalog=markusm;Persist Security Info=False;User ID=workshop;Password=kveOxZEL!gzSWJoItmex;MultipleActiveResultSets=False;Encrypt=True;TrustServerCertificate=False;Connection Timeout=30;";
+            SqlConnection connection = new SqlConnection(connectionString);
+            var result = new List<Manufacturer>();
+            try
+            {
+                connection.Open();
+                var query = $"SELECT * FROM Manufacturer";
+
+                SqlDataAdapter adapter = new SqlDataAdapter(query, connection);
+
+                DataSet manufacturers = new DataSet();
+                adapter.Fill(manufacturers, "Manufacturer");
+
+                Manufacturer manufacturer = new Manufacturer();
+                manufacturer.Name = manufacturers.Tables["Manufacturer"].Rows[0][1].ToString();
+                Console.WriteLine(manufacturers.Tables[0].Rows.Count);
+
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+            }
+            finally
+            {
+                connection.Close();
+            }
+        }
+
+        private static void InsertSqlData()
+        {
+            var connectionString = "Server=tcp:workshop-csharp.database.windows.net,1433;Initial Catalog=markusm;Persist Security Info=False;User ID=workshop;Password=kveOxZEL!gzSWJoItmex;MultipleActiveResultSets=False;Encrypt=True;TrustServerCertificate=False;Connection Timeout=30;";
+            SqlConnection connection = new SqlConnection(connectionString);
+            try
+            {
+                connection.Open();
+                var query = "INSERT INTO Manufacturer (Name) VALUES (@ManufacturerName)";
+
+                SqlCommand sqlCommand = connection.CreateCommand();
+                sqlCommand.CommandText = query;
+                SqlParameter sqlParameter = new SqlParameter("@ManufacturerName", "Mercedes");
+                //sqlParameter.Direction = ParameterDirection.Input;
+                sqlCommand.Parameters.Add(sqlParameter);
+
+                var result = sqlCommand.ExecuteNonQuery();
+                Console.WriteLine(result);
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e.Message);
+            }
+            finally
+            {
+                connection.Close();
+            }
+        }
+
+        private static void SelectSqlData()
+        {
+            string manufacturerName = "VW";
+
+            var connectionString = "Server=tcp:workshop-csharp.database.windows.net,1433;Initial Catalog=markusm;Persist Security Info=False;User ID=workshop;Password=kveOxZEL!gzSWJoItmex;MultipleActiveResultSets=False;Encrypt=True;TrustServerCertificate=False;Connection Timeout=30;";
+            SqlConnection connection = new SqlConnection(connectionString);
+            var result = new List<Manufacturer>();
+            try
+            {
+                connection.Open();
+                var query = $"SELECT * FROM Manufacturer WHERE Name = @ManufacturerName";
+
+                SqlCommand sqlCommand = connection.CreateCommand();
+
+                //var paramManufacturerName = new SqlParameter("@ManufacturerName", SqlDbType.VarChar, 50);
+                //paramManufacturerName.Value = manufacturerName;
+
+                var paramManufacturerName = new SqlParameter("@ManufacturerName", manufacturerName);
+
+                sqlCommand.Parameters.Add(paramManufacturerName);
+
+                sqlCommand.CommandText = query;
+
+                using var reader = sqlCommand.ExecuteReader();
+                while (reader.Read())
+                {
+                    Console.WriteLine($"{reader.GetInt32(0)} - {reader.GetString(1)}");
+                    Manufacturer manufacturer = new Manufacturer();
+                    manufacturer.Id = reader.GetInt32(0);
+                    manufacturer.Name = reader.GetString(1);
+
+                    result.Add(manufacturer);
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+            }
+            finally
+            {
+                connection.Close();
+            }
+
+            Console.WriteLine(result.Count);
+        }
+
+
         static void Main(string[] args)
         {
-            WorkingWithJson();
+            SelectSqlDataSet();
+            //InsertSqlData();
+            //SelectSqlData();
+            //WorkingWithJson();
 
             ////Vehicles();
             return;

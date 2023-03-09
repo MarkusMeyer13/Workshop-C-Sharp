@@ -35,9 +35,8 @@ ADO.NET and SQL Server
 Connection strings  
 Data adapters and datasets  
 Entity Framework
-Stored procedures and   
+Stored procedures  
 LINQ to SQL  
-
 
 ## Day 5: Q & A
 
@@ -46,4 +45,3 @@ Unit Tests
 Question & answers  
 ASP.Net Core
 JSON
-
