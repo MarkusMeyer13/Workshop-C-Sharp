@@ -1,4 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Configuration;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -15,7 +16,12 @@ namespace VehicleFactoryCmd
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            optionsBuilder.UseSqlServer(@"Server=tcp:workshop-csharp.database.windows.net,1433;Initial Catalog=markusm;Persist Security Info=False;User ID=workshop;Password=kveOxZEL!gzSWJoItmex;MultipleActiveResultSets=False;Encrypt=True;TrustServerCertificate=False;Connection Timeout=30;");
+            IConfiguration config = new ConfigurationBuilder()
+                .AddJsonFile("appsettings.json")
+                .Build();
+            var connectionString = config.GetConnectionString("vehicleDb");
+
+            optionsBuilder.UseSqlServer(connectionString);
         }
     }
 }
