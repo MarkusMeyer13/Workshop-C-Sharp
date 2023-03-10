@@ -13,9 +13,10 @@ namespace VehicleFactory
             Console.WriteLine($"Type: {GetType().FullName} - {nameof(Drive)}");
         }
 
-        public void Swim()
+        public bool Swim(int maxSwimCount)
         {
             Console.WriteLine($"Type: {GetType().FullName} - {nameof(Swim)}");
+            return true;
         }
     }
 
@@ -25,7 +26,7 @@ namespace VehicleFactory
         {
         }
 
-        public void Swim()
+        public bool Swim(int maxSwimCount)
         {
             throw new NotImplementedException();
         }

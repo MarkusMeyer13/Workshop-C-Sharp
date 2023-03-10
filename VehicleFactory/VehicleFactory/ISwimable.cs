@@ -8,6 +8,6 @@ namespace VehicleFactory
 {
     public interface ISwimable
     {
-        void Swim();
+        bool Swim(int maxSwimCount);
     }
 }
