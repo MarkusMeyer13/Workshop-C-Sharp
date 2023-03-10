@@ -40,8 +40,13 @@ LINQ to SQL
 
 ## Day 5: Q & A
 
+Configuration  
+[https://learn.microsoft.com/en-us/dotnet/core/extensions/configuration](https://learn.microsoft.com/en-us/dotnet/core/extensions/configuration)  
+[https://learn.microsoft.com/en-us/dotnet/api/microsoft.extensions.configuration.configurationextensions.getconnectionstring?view=dotnet-plat-ext-7.0](https://learn.microsoft.com/en-us/dotnet/api/microsoft.extensions.configuration.configurationextensions.getconnectionstring?view=dotnet-plat-ext-7.0)
+
+Async  
+[https://learn.microsoft.com/en-us/dotnet/csharp/asynchronous-programming/](https://learn.microsoft.com/en-us/dotnet/csharp/asynchronous-programming/)
+
 Additional topics  
 Unit Tests  
 Question & answers  
-ASP.Net Core
-JSON
