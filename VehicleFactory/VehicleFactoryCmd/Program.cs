@@ -239,10 +239,54 @@ namespace VehicleFactoryCmd
             Console.WriteLine(result.Count);
         }
 
+        private static void DoSomething(
+            IReadOnlyList<Manufacturer> list
+            , IEnumerable<Manufacturer> enumerable)
+        {
+            foreach (Manufacturer manufacturer in enumerable) { }
+        }
+
+        private static void EfData()
+        {
+            VehicleFactoryContext vehicleFactoryContext = new VehicleFactoryContext();
+
+            //var first = vehicleFactoryContext.Manufacturer.ToList()[0];
+            //vehicleFactoryContext.Manufacturer.Remove(first);
+
+            vehicleFactoryContext.Manufacturer.Add(new Manufacturer() { Name = "abc" });
+            vehicleFactoryContext.SaveChanges();
+
+
+            var manufacturers = vehicleFactoryContext.Manufacturer
+                .Where(_ => !string.IsNullOrEmpty(_.Name)
+                && _.Name.Contains("v"));
+
+            //DoSomething(manufacturers.ToList(), manufacturers);
+
+
+            var list = manufacturers.ToList();
+            for (int i = 0; i < list.Count; i++)
+            {
+                Console.WriteLine(list[i].Name);
+            }
+
+
+            //var enumerator = manufacturers.GetEnumerator();
+            //while (enumerator.MoveNext())
+            //{
+            //    _ = enumerator.Current.Name;
+            //}
+
+            //foreach (var manufacturer in manufacturers)
+            //{
+            //    Console.WriteLine(manufacturer.Name);
+            //}
+        }
 
         static void Main(string[] args)
         {
-            SelectSqlDataSet();
+            EfData();
+            //SelectSqlDataSet();
             //InsertSqlData();
             //SelectSqlData();
             //WorkingWithJson();
