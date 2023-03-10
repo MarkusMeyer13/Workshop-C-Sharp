@@ -13,6 +13,8 @@ namespace VehicleFactory
         [JsonProperty("Type")]
         public EngineType? EngineType { get; set; }
         public int? HorsePower { get; set; }
+        public int Id { get; set; }
+
     }
 
     public class ElectricEngine: Engine

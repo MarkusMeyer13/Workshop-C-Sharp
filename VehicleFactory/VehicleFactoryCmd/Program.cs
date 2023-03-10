@@ -7,6 +7,7 @@ using Newtonsoft.Json.Linq;
 using System.Collections;
 using System.Data.SqlClient;
 using System.Data;
+using Microsoft.Extensions.Configuration;
 
 namespace VehicleFactoryCmd
 {
@@ -239,10 +240,30 @@ namespace VehicleFactoryCmd
             Console.WriteLine(result.Count);
         }
 
+        private static void EfData()
+        {
+            using (var context = new VehicleFactoryContext())
+            {
+
+                //var std = new Manufacturer()
+                //{
+                //    Name = "Audi"
+                //};
+
+                //context.Manufacturer.Add(std);
+                //context.SaveChanges();
+
+                var result = context.Manufacturer.Where(_ => _.Name.Contains("v"));
+                Console.WriteLine(result);
+            }
+        }
 
         static void Main(string[] args)
         {
-            SelectSqlDataSet();
+            EfData();
+
+
+            //SelectSqlDataSet();
             //InsertSqlData();
             //SelectSqlData();
             //WorkingWithJson();
