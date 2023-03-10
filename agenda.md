@@ -38,6 +38,9 @@ Entity Framework
 Stored procedures  
 LINQ to SQL  
 
+[Entityframework tutorial](https://www.entityframeworktutorial.net/)  
+[First EF Core Console Application](https://www.entityframeworktutorial.net/efcore/entity-framework-core-console-application.aspx)
+
 ## Day 5: Q & A
 
 Configuration  
