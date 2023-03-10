@@ -285,7 +285,11 @@ namespace VehicleFactoryCmd
 
         static void Main(string[] args)
         {
-            EfData();
+            var bytes = File.ReadAllBytes(".\\a.pdf");
+
+            File.WriteAllBytes(@".\b.pdf", bytes);
+
+            //EfData();
             //SelectSqlDataSet();
             //InsertSqlData();
             //SelectSqlData();

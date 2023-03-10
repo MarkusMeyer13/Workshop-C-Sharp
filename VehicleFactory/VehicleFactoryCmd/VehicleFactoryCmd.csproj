@@ -25,6 +25,9 @@
   </ItemGroup>
 
   <ItemGroup>
+    <None Update="a.pdf">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
     <None Update="Cars.json">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
