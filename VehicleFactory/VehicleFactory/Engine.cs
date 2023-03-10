@@ -1,6 +1,7 @@
 ﻿using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Text;
 using System.Text.Json.Serialization;
@@ -13,9 +14,17 @@ namespace VehicleFactory
         [JsonProperty("Type")]
         public EngineType? EngineType { get; set; }
         public int? HorsePower { get; set; }
-    }
 
-    public class ElectricEngine: Engine
+        [NotMapped]
+        public double? Power
+        {
+            get
+            {
+                return HorsePower * 0.7355;
+            }
+        }
+    }
+    public class ElectricEngine : Engine
     {
 
     }
@@ -24,7 +33,7 @@ namespace VehicleFactory
     {
         public static Engine Build(EngineType engineType)
         {
-            if(engineType == EngineType.Electric)
+            if (engineType == EngineType.Electric)
             {
                 return new ElectricEngine();
             }
